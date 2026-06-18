@@ -120,38 +120,41 @@ button:hover {
   </style>
 </head>
 <body>
-  <h2>tiMe and space<br>案内システム登録</h2>
-  <p>必要事項を入力し、「登録する」ボタンを押してください。</p>
-  
-  <form id="registration-form">
+
+  <div class="container">
+
+    <h1>tiMe and space<br>案内システム登録</h1>
+    <p class="note">必要事項を入力し、「登録する」ボタンを押してください。</p>
+
     <div class="form-group">
-      <label for="customer-name">お名前（フルネーム）</label>
-      <input type="text" id="customer-name" required placeholder="山田 太郎">
+      <label>お名前（フルネーム）</label>
+      <input type="text" id="name" placeholder="山田 太郎">
     </div>
 
     <div class="form-group">
-      <label for="customer-kana">フリガナ</label>
-      <input type="text" id="customer-kana" required placeholder="ヤマダ タロウ">
+      <label>フリガナ</label>
+      <input type="text" id="kana" placeholder="ヤマダ タロウ">
     </div>
 
     <div class="form-group">
-      <label for="customer-email">メールアドレス</label>
-      <input type="email" id="customer-email" required placeholder="example@mail.com">
+      <label>メールアドレス</label>
+      <input type="email" id="email" placeholder="example@mail.com">
     </div>
 
     <div class="form-group">
-      <label for="notification-type">希望する通知方法</label>
-      <select id="notification-type" required>
-        <option value="メール">メールで受け取る</option>
-        <option value="プッシュ通知">スマホのプッシュ通知で受け取る</option>
+      <label>希望する通知方法</label>
+      <select id="type">
+        <option value="プッシュ通知">プッシュ通知</option>
+        <option value="メール">メール</option>
       </select>
     </div>
 
-    <input type="hidden" id="token-storage">
+    <button id="registerBtn">登録する</button>
 
-    <button type="submit" id="submit-btn">登録する</button>
-  </form>
+  </div>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-messaging-compat.js"></script>
+  <script src="app.js"></script>
 
-  <script type="module" src="./app.js"></script>
 </body>
 </html>
