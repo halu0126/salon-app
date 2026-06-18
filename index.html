@@ -5,13 +5,118 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>サロン通知設定</title>
   <style>
-    body { font-family: sans-serif; padding: 20px; max-width: 400px; margin: 0 auto; }
-    .form-group { margin-bottom: 15px; }
-    label { display: block; font-weight: bold; margin-bottom: 5px; }
-    input[type="text"], input[type="email"], select { width: 100%; padding: 8px; box-sizing: border-box; }
-    button { width: 100%; padding: 12px; background-color: #4CAF50; color: white; border: none; font-size: 16px; cursor: pointer; }
-    button:disabled { background-color: #cccccc; }
-    .hidden-token { display: none; } /* お客様には見せないように隠します */
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;500&family=Noto+Sans+JP:wght@300;400;500&display=swap');
+
+:root {
+  /* tiMe and space カラーパレット */
+  --bg-color: #FBF9F6;       /* 優しいアイボリー（背景） */
+  --text-color: #4A4542;     /* 温かみのあるダークブラウン（文字色） */
+  --border-color: #DCD4C9;   /* 薄いベージュ（枠線） */
+  --btn-color: #8C7A6B;      /* 落ち着いたモカブラウン（ボタン色） */
+  --btn-hover: #756558;      /* ボタンを押した時の色 */
+  --accent-color: #7B8D75;   /* セージグリーン（チェックマークなど） */
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Noto Sans JP', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  background-color: #ffffff;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* うっすらとした上品な影 */
+  width: 90%;
+  max-width: 400px;
+}
+
+/* タイトル部分 */
+h1 {
+  font-family: 'Josefin Sans', 'Noto Sans JP', sans-serif;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 500;
+  margin-bottom: 30px;
+  color: var(--text-color);
+  letter-spacing: 1px;
+}
+
+/* 入力グループの余白 */
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* ★超重要：iPhoneズーム対策 ＆ やわらかい入力枠★ */
+input[type="text"],
+input[type="email"],
+select {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 16px; /* ←iPhoneでズームさせない魔法の数字！ */
+  font-family: 'Noto Sans JP', sans-serif;
+  border: 1px solid var(--border-color);
+  border-radius: 8px; /* 少し丸みを持たせる */
+  background-color: #FAF9F8;
+  color: var(--text-color);
+  transition: all 0.3s ease;
+  appearance: none; /* スマホ特有のデザインをリセット */
+}
+
+/* 入力中に枠線の色を少し濃くする */
+input:focus,
+select:focus {
+  outline: none;
+  border-color: var(--btn-color);
+  background-color: #ffffff;
+}
+
+/* 登録ボタン */
+button {
+  width: 100%;
+  padding: 15px;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: #fff;
+  background-color: var(--btn-color);
+  border: none;
+  border-radius: 25px; /* リラックス感のある丸いボタン */
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--btn-hover);
+}
+
+/* 注意書きなどの小さい文字 */
+.note {
+  font-size: 12px;
+  color: #888;
+  text-align: center;
+  margin-top: 15px;
+  line-height: 1.5;
+}
   </style>
 </head>
 <body>
