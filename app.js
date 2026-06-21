@@ -73,7 +73,7 @@ document.getElementById('registration-form').addEventListener('submit', async (e
     });
     
     if (response.ok) {
-      alert("ご登録が完了しました！案内リマインダーを楽しみにお待ちください。");
+      alert("ご登録が完了しました！「受付完了の自動返信メール」をご確認ください。");
       document.getElementById('registration-form').reset();
     } else {
       throw new Error("サーバーエラー");
@@ -81,7 +81,7 @@ document.getElementById('registration-form').addEventListener('submit', async (e
 
   } catch (error) {
     console.error("送信エラー:", error);
-    alert("登録送信中にエラーが発生しました。\n詳細: " + error.message);
+    alert("登録送信中にエラーが発生しました。\nこのサイトからは登録できません。\nアプリから登録しなおしてください。 " + error.message);
   } finally {
     submitBtn.disabled = false;
     submitBtn.innerText = "登録する";
