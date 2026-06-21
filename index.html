@@ -26,7 +26,7 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
   margin: 0;
-  padding: 3vh 0;
+  padding: 6vh 0;
   display: flex;
   justify-content: center;
   min-height: 100vh;
@@ -42,12 +42,10 @@ body {
   margin: auto;
 }
 
-/* ★新機能：非表示用クラス */
 .hidden {
   display: none !important;
 }
 
-/* 共通タイトル */
 h1 {
   font-family: 'Josefin Sans', 'Noto Sans JP', sans-serif;
   text-align: center;
@@ -72,32 +70,87 @@ h1 {
   line-height: 1.6;
   margin-bottom: 25px;
 }
+
+/* 🌟 UI改善：ステップデザインを美しく整理しました */
 .guide-step {
   background-color: #FAF9F8;
   border: 1px solid var(--border-color);
   border-radius: 8px;
-  padding: 18px 15px;
-  font-size: 14px;
-  line-height: 1.6;
+  padding: 20px 15px;
   text-align: left;
   margin-bottom: 15px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.02);
 }
-.guide-step strong {
+
+/* OSの名前（iPhone / Android）のタイトル */
+.os-title {
+  font-weight: 500;
+  color: var(--btn-color);
+  margin-bottom: 15px;
+  font-size: 15px;
+  text-align: center;
+  border-bottom: 1px dashed var(--border-color);
+  padding-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+/* 番号付きリストの設定 */
+.step-list {
+  padding-left: 0;
+  margin: 0;
+  list-style: none;
+  counter-reset: step-counter;
+}
+
+.step-list li {
+  position: relative;
+  padding-left: 32px;
+  margin-bottom: 15px;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--text-color);
+}
+
+.step-list li:last-child {
+  margin-bottom: 0;
+}
+
+/* 丸い番号アイコンのデザイン */
+.step-list li::before {
+  content: counter(step-counter);
+  counter-increment: step-counter;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 22px;
+  height: 22px;
+  background-color: var(--btn-color);
+  color: #fff;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.step-list strong {
   color: var(--btn-color);
 }
+
+/* アイコン設定（少しだけ大きく調整） */
+.inline-icon {
+  width: 1.3em;
+  height: 1.3em;
+  vertical-align: -0.25em;
+  margin: 0 2px;
+  stroke: var(--btn-color);
+}
+
 .guide-note {
   font-size: 11px;
   color: #888;
   margin-top: 20px;
-}
-
-/* ★追加：文中に綺麗にアイコンを並べるための設定 */
-.inline-icon {
-  width: 1.2em;
-  height: 1.2em;
-  vertical-align: -0.2em;
-  margin: 0 2px;
-  stroke: var(--btn-color);
 }
 
 /* ======= 登録フォーム画面のデザイン ======= */
@@ -182,22 +235,30 @@ button:disabled {
 
   <div class="container">
     
+    <!-- ▼▼▼ ブラウザで開いた時：アプリ化の案内 ▼▼▼ -->
     <div id="install-guide" class="hidden">
       <div class="guide-box">
         <div class="guide-icon">📱</div>
         <h1>tiMe and space<br>ご予約リマインダー</h1>
         <p class="guide-desc">こちらはアプリ専用のシステムです。<br>確実にお知らせをお届けするため、<br>ホーム画面に追加してご利用ください。</p>
 
+        <!-- iPhone用案内 -->
         <div id="ios-guide" class="guide-step hidden">
-          【iPhoneをご利用の方】<br><br>
-          画面の <strong>共有ボタン <svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg></strong> 、またはアドレスバー付近の <strong>メニューボタン（ <svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="19" cy="12" r="1.5"></circle></svg> など ）</strong> をタップし、<br>
-          一覧から <strong>「ホーム画面に追加」</strong> を選択し、<strong>「webアプリとして開く」をオン</strong>にして追加してください。
+          <div class="os-title">iPhoneをご利用の方</div>
+          <ol class="step-list">
+            <li>画面の <strong>共有ボタン <svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg></strong> 、または <strong>メニューボタン（ <svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="19" cy="12" r="1.5"></circle></svg> など ）</strong> をタップ</li>
+            <li>一覧から <strong>「ホーム画面に追加」</strong> を選択</li>
+            <li><strong>「webアプリとして開く」をオン</strong> にして追加</li>
+          </ol>
         </div>
 
+        <!-- Android用案内 -->
         <div id="android-guide" class="guide-step hidden">
-          【Androidをご利用の方】<br><br>
-          アドレスバー付近の <strong>メニューボタン（ <svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="12" cy="19" r="1.5"></circle></svg> や <svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="19" cy="12" r="1.5"></circle></svg> など ）</strong> をタップし、<br>
-          一覧から <strong>「ホーム画面に追加」から「インストール」</strong> または <strong>「アプリをインストール」</strong> を選択してください。
+          <div class="os-title">Androidをご利用の方</div>
+          <ol class="step-list">
+            <li>アドレスバー付近の <strong>メニューボタン（ <svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="12" cy="19" r="1.5"></circle></svg> や <svg class="inline-icon" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="5" cy="12" r="1.5"></circle><circle cx="12" cy="12" r="1.5"></circle><circle cx="19" cy="12" r="1.5"></circle></svg> など ）</strong> をタップ</li>
+            <li>一覧から <strong>「ホーム画面に追加」から「インストール」</strong> または <strong>「アプリをインストール」</strong> を選択</li>
+          </ol>
         </div>
 
         <p class="guide-note">※追加後、ホーム画面にできた新しいアイコンから開くと、登録画面が表示されます。</p>
@@ -205,6 +266,7 @@ button:disabled {
     </div>
 
 
+    <!-- ▼▼▼ アプリで開いた時：いつもの登録フォーム ▼▼▼ -->
     <div id="app-content" class="hidden">
       <h1>tiMe and space<br>ご予約リマインダー</h1>
       <p class="note">ご予約日の前日と当日に、確認のお知らせをお届けします。</p>
