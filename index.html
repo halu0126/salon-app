@@ -318,6 +318,31 @@ button.tab-btn.active {
   border: 1px solid var(--border-color);
   border-radius: 8px;
 }
+
+/* 🌟【新規】ホームページを画面いっぱいに広げるための設定 */
+#tab-hp.active {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  /* 画面全体の高さから、下のタブバーの高さ（約62px）とiPhoneのバーの余白を引く */
+  height: calc(100vh - 62px - env(safe-area-inset-bottom)); 
+  z-index: 999; /* タブバー(z-index: 1000)のすぐ裏に配置して、タブ操作を邪魔しないようにする */
+  background-color: #ffffff;
+}
+
+#tab-hp h2 {
+  display: none; /* 画面をできるだけ広く使うため、「Salon HP」の文字は自動で消します */
+}
+
+/* iframe自体も隙間なく100%広げる */
+.hp-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 0;
+}
+
   </style>
 </head>
 <body>
