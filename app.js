@@ -2,9 +2,30 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebas
 import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-messaging.js";
 import { APP_CONFIG } from "./config.js";
 
+// 🌟【新機能】通知タップで起動した際、メッセージを画面にポップアップ表示する処理
+(function() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const msgTitle = urlParams.get('msg_title');
+  const msgBody = urlParams.get('msg_body');
+
+  if (msgTitle && msgBody) {
+    // 画面がしっかり表示されてからポップアップを出す（0.5秒ずらす）
+    setTimeout(() => {
+      // 改行コード（\n）を、画面表示用の改行コード（\n）に綺麗に整える
+      const cleanBody = decodeURIComponent(msgBody).replace(/\\n/g, '\n');
+      
+      // 美しいアラート画面（ポップアップ）を表示
+      alert(`【${decodeURIComponent(msgTitle)}】\n\n${cleanBody}`);
+      
+      // 2回目開いた時にまた出ないように、URLからメッセージの文字をきれいに消しておく
+      const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+      window.history.replaceState({}, document.title, cleanUrl);
+    }, 500);
+  }
+})();
 
 // ==========================================
-// 1. FirebaseとGASの設定（秘密の情報は消えました！）
+// 1. FirebaseとGASの設定
 // ==========================================
 const app = initializeApp(APP_CONFIG.FIREBASE_CONFIG);
 const messaging = getMessaging(app);
