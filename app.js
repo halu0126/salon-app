@@ -149,3 +149,48 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
+
+// 🌟【新規機能】アプリ起動時に次回の予約を自動取得する処理
+async function loadNextReservation() {
+  const reservationText = document.getElementById('next-reservation');
+  if (!reservationText) return;
+  
+  try {
+    // 1. Firebaseから現在のスマホのトークン（鍵）をこっそり取得
+    const messaging = getMessaging();
+    const registration = await navigator.serviceWorker.ready;
+    const token = await getToken(messaging, { 
+      vapidKey: APP_CONFIG.FIREBASE_VAPID_KEY, 
+      serviceWorkerRegistration: registration 
+    });
+
+    if (!token) {
+      reservationText.textContent = "通知設定が未登録です";
+      return;
+    }
+
+    // 2. GAS（予約検索係）にトークンを渡して質問する
+    // ※ 注意: config.js に書かれているGASのURL変数名が「GAS_WEB_APP_URL」以外（例: GAS_URLなど）の場合は、ここを書き換えてください。
+    const gasUrl = APP_CONFIG.GAS_WEB_APP_URL + "?token=" + encodeURIComponent(token);
+    
+    const response = await fetch(gasUrl);
+    const result = await response.json();
+
+    // 3. 結果を画面に表示する
+    if (result.status === "success") {
+      reservationText.textContent = result.nextDate;
+    } else {
+      reservationText.textContent = "確認できませんでした";
+    }
+  } catch (error) {
+    console.error("予約取得エラー:", error);
+    reservationText.textContent = "通信エラー";
+  }
+}
+
+// 画面の準備ができたら、自動で予約取得をスタートする
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', loadNextReservation);
+} else {
+  loadNextReservation();
+}
